@@ -357,11 +357,11 @@
 }
 
 .button-label .button-img {
-    content: url('before_click.png');
+    content: url('img/before_click.png');
 }
 
 .button-pressed .button-img {
-    content: url('after_click.png');
+    content: url('img/after_click.png');
     transform: translateY(8px);
 }
 
@@ -376,4 +376,13 @@
 
 .hand-img{
     width: 200px;
+}
+
+
+/* 김민성 : NPC(감시자 css) */
+.observer-img {
+    position: absolute;
+    bottom: 20px;
+    width: 30%;
+
 }

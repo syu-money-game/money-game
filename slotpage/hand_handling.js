@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, stopTime3);
     }
 
+
+    // 버튼 입력시 console에 계속찍힘 -> 로직 개선바람.
     function animateButtonAndHand() {
         button.classList.add('button-pressed');
         rightHand.classList.add('hand-moved');
@@ -53,8 +55,4 @@ document.addEventListener('DOMContentLoaded', () => {
         spinReels();
     });
 
-    lever.addEventListener('click', () => {
-        animateButtonAndHand();
-        spinReels();
-    });
 });

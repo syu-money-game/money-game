@@ -1,3 +1,4 @@
+// 이소영 : 체력 감소 & 감소 시 게임 오버 시작
 function gameOver() {
     window.location.href = "../gameoverpage/gameover.html";
 }
@@ -27,3 +28,4 @@ function updateHealthBar() {
         }
     });
 }
+// 이소영 : 체력 감소 & 감소 시 게임 오버 끝

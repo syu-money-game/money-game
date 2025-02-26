@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+body {
+    margin: 0;
+    overflow: hidden;
+    text-align: center;
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+/* 시작 화면 */
+#startScreen {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('img/start_bg.png');
+    background-size: cover;
+    opacity: 0.85;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+#startScreen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+}
+
+.gameStartImage {
+    width: 600px;
+    height: 700px;
+    bottom: -60px;
+    background-image: url('img/GameStart.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    display: block;
+    z-index: 1;
+}
+
+.start_btn {
+    width: 500px;
+    height: 400px;
+    top: 200px;
+    transform: translateX(0%);
+    background-image: url('img/gamestart_btn.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    animation: blink 1.8s linear infinite;
+}
+
+.start_text {
+    position: relative;
+    top: -100px;
+    font-size: 30px;
+    color: #FF1493;
+    text-shadow: 6px 6px 10px #00ffcc;
+    animation: blink 1.8s linear infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    20% { opacity: 0.8; }
+    40% { opacity: 0.6; }
+    60% { opacity: 0.4; }
+    80% { opacity: 0.6; }
+    100% { opacity: 0.8; }
+}

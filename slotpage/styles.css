@@ -1,0 +1,328 @@
+/* css 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+/* background css */
+.background-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Main_container css */
+.main-Container{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* health_bar css */
+@keyframes heartbeat {
+    0% {
+        transform: translateY(0);
+    }
+    10% {
+        transform: translateY(-5px);
+    }
+    20% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-3px);
+    }
+    40% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.heart:nth-child(1) { animation-delay: 0.3s; }
+.heart:nth-child(2) { animation-delay: 0.6s; }
+.heart:nth-child(3) { animation-delay: 0.9s; }
+
+.health-Bar{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 250px;
+    height: 100px;
+    left: 20px;
+}
+
+.heart {
+    width: 100px;
+    height: 100%;
+    background-image: url('./img/health_heart.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+    animation: heartbeat 5s linear infinite;
+}
+
+/* stage css */
+.stage-Bar{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    top: 100px;
+    left: 20px;
+    width: 250px;
+    height: 100px;
+    font-size: 40pt;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+}
+
+
+
+/* score css */
+.score-Bar {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40pt;
+    color: black;
+    font-weight: bold;
+}
+
+
+/* money-Bar css */
+.Money-Bar{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    width: 500px;
+    height: 200px;
+    top: 0;
+    right: 0;
+    color: black;
+    font-weight: bold;
+    background: rgb(206, 253, 164, 0.5);
+    border-radius: 10px;
+}
+
+.Money-Bar div > img{
+    position: absolute;
+    left: 10px;
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.Money-Bar div {
+    margin-top: 10px;
+}
+
+.Money-Bar div > span{
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 35pt;
+}
+
+.current-moneyBar{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.batting-moneyBar{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slot-machine CSS */
+@keyframes spinVertical {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-550px); }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.slot-Container {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.slot-Machine-img {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+}
+
+.lever{
+    position: absolute;
+    background-image: url("./img/lever.png");
+    top: 30%;
+    right: -5%;
+    width: 250px;
+    height: 250px;
+    z-index: 3;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.lever:hover{
+    animation: blink 0.5s infinite alternate;
+}
+
+.lever:active {
+    top:50%;
+    background-image: url("./img/PulledLever.png");
+}
+
+#slot-point1 {
+    display: inline-block; /* width, height 적용 가능 */
+    font-size: 30px;
+    color: red;
+    position: absolute;
+    left: 110px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#slot-point2{
+    display: inline-block; /* width, height 적용 가능 */
+    font-size: 30px;
+    color: red;
+    position: absolute;
+    right: 90px;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(180deg);
+
+}
+
+.reels {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    width: 600px;
+    height: 330px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.reel1, .reel2, .reel3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    /*animation: spinVertical 0.5ms linear infinite;*/
+}
+
+
+.reel1:nth-child(1) { animation-delay: 0s; }
+.reel2:nth-child(2) { animation-delay: 1s; }
+.reel3:nth-child(3) { animation-delay: 2s; }
+
+.symbol {
+    width: 170px;
+    height: 230px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px; /* 세로 간격 추가 */
+}
+
+.symbol.grape { background-image: url('./img/grape.png'); }
+.symbol.orange { background-image: url('./img/orange.png'); }
+.symbol.apple { background-image: url('./img/apple.png'); }
+.symbol.bar { background-image: url('./img/bar.png'); }
+.symbol.seven { background-image: url('./img/7.png'); }
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    left: 50%;      
+    bottom: 20px;      
+    transform: translateX(-50%); 
+    overflow: visible;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.button-img {
+    width: 150px; /* 버튼 크기 살짝 증가 */
+    transition: transform 0.1s ease-in-out;
+}
+
+.hand-img {
+    width: 200px; /* 손 크기 증가 */
+    transition: transform 0.1s ease-in-out;
+    position: relative;
+}
+
+/* 체크박스 숨기기 */
+#toggle {
+    display: none;
+}
+
+/* 클릭 전 상태 */
+.button-label img {
+    content: url('before_click.png');
+}
+
+ /* 클릭 후 버튼 변경 */
+ #toggle:checked + .button-label img {
+    content: url('after_click.png');
+    position: relative;
+    top: 8px;
+    
+}
+
+/* 클릭 후 오른손 이동 및 반시계 방향 20도 회전 */
+#toggle:checked ~ .hand-img {
+    transform: translate(-90px, -80px) rotate(-20deg); /* 왼쪽 이동 + 위쪽 이동 + 반시계 방향 회전 */
+}

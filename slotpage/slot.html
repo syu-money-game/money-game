@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>슬롯머신</title>
+    <script
+            src="https://kit.fontawesome.com/93236c49f3.js"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <img src="./img/background.png" class="background-img" alt="배경이미지">
+    <div class="main-Container">
+        <div class="health-Bar">
+            <div class="heart" id="heart1"></div>
+            <div class="heart" id="heart2"></div>
+            <div class="heart" id="heart3"></div>
+        </div>
+        <div class="stage-Bar">
+            STAGE: <span id="stage">0</span>
+        </div>
+        <div class="score-Bar">
+            SCORE: <span id="score">0</span>
+        </div>
+        <div class="Money-Bar">
+            <div class="current-moneyBar">
+                <img class="current-money-img" src="./img/pocket.png" alt="돈주머니">
+                <span id="currentMoney">0</span>
+            </div>
+            <div class="batting-moneyBar">
+                <img class="batting-money-img" src="./img/batting-Money.png" alt="배팅머니">
+                <span id="battingMoney">0</span>
+            </div>
+        </div>
+        <div class="slot-Container">
+            <img class="slot-Machine-img" src="./img/slot-machine.png" alt="슬롯머신">
+            <i class="fa-solid fa-play" id="slot-point1"></i>
+            <i class="fa-solid fa-play" id="slot-point2"></i>
+            <div class="lever"></div>
+            <div class="reels">
+                <div class="reel1">
+                    <div class="symbol grape"></div>
+                    <div class="symbol orange"></div>
+                    <div class="symbol apple"></div>
+                    <div class="symbol bar"></div>
+                    <div class="symbol seven"></div>
+                </div>
+                <div class="reel2">
+                    <div class="symbol seven"></div>
+                    <div class="symbol grape"></div>
+                    <div class="symbol orange"></div>
+                    <div class="symbol apple"></div>
+                    <div class="symbol bar"></div>
+                </div>
+                <div class="reel3">
+                    <div class="symbol bar"></div>
+                    <div class="symbol seven"></div>
+                    <div class="symbol grape"></div>
+                    <div class="symbol orange"></div>
+                    <div class="symbol apple"></div>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Move this container below the slot machine -->
+        <div class="container">
+            <img src="left_hand.png" alt="왼손" class="hand-img">
+            
+            <!-- 숨겨진 체크박스 -->
+            <input type="checkbox" id="toggle">
+            
+            <!-- 버튼 (라벨을 클릭하면 체크박스가 토글됨) -->
+            <label for="toggle" class="button-label">
+                <img src="before_click.png" alt="버튼" class="button-img">
+            </label>
+            
+            <img src="right_hand.png" alt="오른손" class="hand-img">
+        </div>
+        
+    </div>
+    </body>
+    
+</html>

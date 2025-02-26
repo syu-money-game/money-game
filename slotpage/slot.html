@@ -9,6 +9,7 @@
             src="https://kit.fontawesome.com/93236c49f3.js"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
     <img src="./img/background.png" class="background-img" alt="배경이미지">
@@ -67,16 +68,14 @@
         <!-- Move this container below the slot machine -->
         <div class="container">
             <img src="left_hand.png" alt="왼손" class="hand-img">
-            
             <!-- 숨겨진 체크박스 -->
-            <input type="checkbox" id="toggle">
+            <input type="button" id="toggle">
             
             <!-- 버튼 (라벨을 클릭하면 체크박스가 토글됨) -->
             <label for="toggle" class="button-label">
                 <img src="before_click.png" alt="버튼" class="button-img">
             </label>
-            
-            <img src="right_hand.png" alt="오른손" class="hand-img">
+            <img src="right_hand.png" alt="오른손" class="hand-img right-hand-img">
         </div>
         
     </div>

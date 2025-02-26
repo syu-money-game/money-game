@@ -151,6 +151,49 @@
     justify-content: center;
 }
 
+.Batting-Bar {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 300px;
+    height: 50px;
+    padding: 5px;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+
+
+}
+
+#battingInput {
+    width: 80%;
+    height: 80%;
+    font-size: 16pt;
+    text-align: center;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+#battingConfirm {
+    width: 80px;
+    height: 80%;
+    font-size: 14pt;
+    font-weight: bold;
+    background-color: #000000; /* 녹색 버튼 예시 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#battingConfirm:hover {
+    background-color: rgba(0, 0, 0, 0.8); /* 호버 시 색상 변경 */
+}
+
 /* Slot-machine CSS */
 @keyframes spinVertical {
     0% { transform: translateY(0); }
@@ -310,35 +353,6 @@
     position: relative;
 }
 
-/*.button-img {*/
-/*    width: 150px; !* 버튼 크기 살짝 증가 *!*/
-/*    transition: transform 0.5s ease-in-out;*/
-/*}*/
-
-/*.hand-img {*/
-/*    width: 200px; !* 손 크기 증가 *!*/
-/*    transition: transform 0.3s ease-in-out;*/
-/*    position: relative;*/
-/*}*/
-
-/*!* 클릭 전 상태 *!*/
-/*.button-label .button-img {*/
-/*    content: url('before_click.png');*/
-/*}*/
-
-/* !* 클릭 후 버튼 변경 *!*/
-/* #toggle:active + .button-label img {*/
-/*    content: url('after_click.png');*/
-/*    position: relative;*/
-/*    top: 8px;*/
-
-/*}*/
-
-/*!* 클릭 후 오른손 이동 및 반시계 방향 20도 회전 *!*/
-/*#toggle:active ~ .hand-img {*/
-/*    transform: translate(-90px, -80px) rotate(-20deg); !* 왼쪽 이동 + 위쪽 이동 + 반시계 방향 회전 *!*/
-/*}*/
-
 .button-label {
     border: none;
     background: none;
@@ -367,13 +381,15 @@
 
 .right-hand-img{
     width: 200px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5ms ease-in-out;
 }
 
 .hand-moved{
     transform: translate(-90px, -80px) rotate(-20deg);
+
 }
 
 .hand-img{
     width: 200px;
 }
+

@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const rightHand = document.querySelector('.right-hand-img');
     const button = document.querySelector('.button-label');
 
-    // 요소가 없으면 에러 로그 출력 후 종료
     if (!toggle || !rightHand || !button || !lever || !reel1 || !reel2 || !reel3) {
         console.error('Missing elements:', {
             toggle, rightHand, button, lever, reel1, reel2, reel3
@@ -33,27 +32,41 @@ document.addEventListener('DOMContentLoaded', () => {
         // 이미 스핀 중일 경우 취소
         if (isSpinning) return;
         isSpinning = true;
+      
+// 상혁 : 배당금 및 릴 확률 , 디비에 머니 로직 잘되는지 확인
+// <<<<<<< feature/db/_main
+//         // 릴 관련 애니메이션
+// =======
+//         // 버튼과 레버 비활성화
+//         toggle.disabled = true;
+//         lever.classList.add('disabled');
 
-        // 릴 관련 애니메이션
+// >>>>>>> feature/slotmachine/_sanghyeok
         reel1.classList.add('spinning');
         reel2.classList.add('spinning');
         reel3.classList.add('spinning');
 
-        const stopTime1 = Math.random() * 2000 + 2000;
-        const stopTime2 = Math.random() * 2000 + 2500;
-        const stopTime3 = Math.random() * 2000 + 3000;
+        const stopTime1 = 3000;
+        const stopTime2 = 4000;
+        const stopTime3 = 5000;
 
         setTimeout(() => reel1.classList.remove('spinning'), stopTime1);
         setTimeout(() => reel2.classList.remove('spinning'), stopTime2);
         setTimeout(() => {
             reel3.classList.remove('spinning');
             isSpinning = false;
+// <<<<<<< feature/db/_main
 
-            // 스핀 결과 처리
-            if (typeof spinResult === 'function') {
-                // TODO : slot_db.js 의 spinResult 함수 확률에 따른 가중치 추가 필요
-                spinResult();
-            }
+//             // 스핀 결과 처리
+//             if (typeof spinResult === 'function') {
+//                 // TODO : slot_db.js 의 spinResult 함수 확률에 따른 가중치 추가 필요
+//                 spinResult();
+//             }
+// =======
+//             // 버튼과 레버 다시 활성화
+//             toggle.disabled = false;
+//             lever.classList.remove('disabled');
+// >>>>>>> feature/slotmachine/_sanghyeok
         }, stopTime3);
     }
 
@@ -68,12 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     toggle.addEventListener('click', () => {
-        animateButtonAndHand();
-        spinReels();
-    });
-
-    lever.addEventListener('click', () => {
-        animateButtonAndHand();
-        spinReels();
+        if (!isSpinning) {
+            animateButtonAndHand();
+            spinReels();
+        }
     });
 });

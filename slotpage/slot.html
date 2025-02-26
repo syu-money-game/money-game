@@ -9,6 +9,8 @@
             src="https://kit.fontawesome.com/93236c49f3.js"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="slot.js"></script>
+
 </head>
 <body>
     <img src="./img/background.png" class="background-img" alt="배경이미지">
@@ -17,6 +19,7 @@
             <div class="heart" id="heart1"></div>
             <div class="heart" id="heart2"></div>
             <div class="heart" id="heart3"></div>
+            <button onclick="decreaseHealth()">체력 감소</button> <!-- 하트 감소 동작 확인용-->
         </div>
         <div class="stage-Bar">
             STAGE: <span id="stage">0</span>

@@ -151,6 +151,47 @@
     justify-content: center;
 }
 
+.Batting-Bar{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    bottom: 15%;
+    left: 50%;
+    width: 350px;
+    height: 80px;
+    background: rgb(0,0,0, 0.7);
+    border-radius: 10px;
+}
+
+#battingInput {
+    height: 50%;
+    font-size: 16pt;
+    text-align: center;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 70%;
+}
+
+#battingConfirm {
+    width: 80px;
+    height: 50%;
+    font-size: 14pt;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+
+#battingConfirm:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 /* Slot-machine CSS */
 @keyframes spinVertical {
     0% { transform: translateY(0); }

@@ -5,95 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>슬롯머신</title>
-    <script
-            src="https://kit.fontawesome.com/93236c49f3.js"
-            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/93236c49f3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"></script>
+    <script defer src="slot_db.js"></script>
     <script defer src="hand_handling.js"></script>
-<!--    <script defer src="observer.js"></script>-->
     <script defer src="lever_handling.js"></script>
 </head>
 <body>
-    <img src="./img/background.png" class="background-img" alt="배경이미지">
-    <div class="main-Container">
-        <div class="health-Bar">
-            <div class="heart" id="heart1"></div>
-            <div class="heart" id="heart2"></div>
-            <div class="heart" id="heart3"></div>
-        </div>
+<!-- 배경 이미지 -->
+<img src="./img/background.png" class="background-img" alt="배경이미지">
 
-        <div class="stage-Bar">
-            STAGE: <span id="stage">0</span>
-        </div>
-
-        <div class="score-Bar">
-            SCORE: <span id="score">0</span>
-        </div>
-
-        <div class="Money-Bar">
-            <div class="current-moneyBar">
-                <img class="current-money-img" src="./img/pocket.png" alt="돈주머니">
-                <span id="currentMoney">0</span>
-            </div>
-            <div class="batting-moneyBar">
-                <img class="batting-money-img" src="./img/batting-Money.png" alt="배팅머니">
-                <span id="battingMoney">0</span>
-            </div>
-        </div>
-
-        <div class="Batting-Bar">
-            <input type="text" id="battingInput" placeholder="배팅 금액 입력" min="1">
-            <button id="battingConfirm">확인</button>
-        </div>
-
-        <div class="slot-Container">
-            <img class="slot-Machine-img" src="./img/slot-machine.png" alt="슬롯머신">
-            <i class="fa-solid fa-play" id="slot-point1"></i>
-            <i class="fa-solid fa-play" id="slot-point2"></i>
-            <div class="lever"></div>
-            <div class="reels">
-                <div class="reel1">
-                    <div class="symbol grape"></div>
-                    <div class="symbol orange"></div>
-                    <div class="symbol apple"></div>
-                    <div class="symbol bar"></div>
-                    <div class="symbol seven"></div>
-                </div>
-                <div class="reel2">
-                    <div class="symbol seven"></div>
-                    <div class="symbol grape"></div>
-                    <div class="symbol orange"></div>
-                    <div class="symbol apple"></div>
-                    <div class="symbol bar"></div>
-                </div>
-                <div class="reel3">
-                    <div class="symbol bar"></div>
-                    <div class="symbol seven"></div>
-                    <div class="symbol grape"></div>
-                    <div class="symbol orange"></div>
-                    <div class="symbol apple"></div>
-                </div>
-            </div>
-        </div>
-    
-        <!-- Move this container below the slot machine -->
-        <div class="container">
-            <img src="img/left_hand.png" alt="왼손" class="hand-img">
-            <!-- 숨겨진 체크박스 -->
-            <input type="button" id="toggle">
-            <!-- 버튼 (라벨을 클릭하면 체크박스가 토글됨) -->
-            <label for="toggle" class="button-label">
-                <img src="img/before_click.png" alt="버튼" class="button-img">
-            </label>
-            <img src="img/right_hand.png" alt="오른손" class="hand-img right-hand-img">
-        </div>
-
-        <!-- 김민성 : NPC(감시자)가 확률 조작 버튼을 눌렀을 때 눈 색이 변함 --->
-        <div>
-            <img src="img/observer.png" class="observer-img observer-img" alt="옵저버">
-        </div>
-
+<!-- 메인 컨테이너 -->
+<div class="main-Container">
+    <!-- 1) 하트 (목숨) 영역 -->
+    <div class="health-Bar">
+        <div class="heart" id="heart1"></div>
+        <div class="heart" id="heart2"></div>
+        <div class="heart" id="heart3"></div>
     </div>
-    </body>
-    
+
+    <!-- 2) 스테이지 표시 -->
+    <div class="stage-Bar">
+        STAGE: <span id="stage">0</span>
+    </div>
+
+    <!-- 3) 스코어 표시 -->
+    <div class="score-Bar">
+        SCORE: <span id="score">0</span>
+    </div>
+
+    <!-- 4) 소지금 & 배팅금액 표시 -->
+    <div class="Money-Bar">
+        <div class="current-moneyBar">
+            <img class="current-money-img" src="./img/pocket.png" alt="돈주머니">
+            <span id="currentMoney">0</span>
+        </div>
+        <div class="batting-moneyBar">
+            <img class="batting-money-img" src="./img/batting-Money.png" alt="배팅머니">
+            <span id="battingMoney">0</span>
+        </div>
+    </div>
+
+    <!-- 5) 배팅 금액 입력 -->
+    <div class="Batting-Bar">
+        <input type="number" id="battingInput" placeholder="배팅 금액 입력" min="1">
+        <button id="battingConfirm">확인</button>
+    </div>
+
+    <!-- 6) 슬롯머신 본체 -->
+    <div class="slot-Container">
+        <img class="slot-Machine-img" src="./img/slot-machine.png" alt="슬롯머신">
+        <i class="fa-solid fa-play" id="slot-point1"></i>
+        <i class="fa-solid fa-play" id="slot-point2"></i>
+        <div class="lever"></div>
+        <div class="reels">
+            <div class="reel1">
+                <div class="symbol grape"></div>
+                <div class="symbol orange"></div>
+                <div class="symbol apple"></div>
+                <div class="symbol bar"></div>
+                <div class="symbol seven"></div>
+            </div>
+            <div class="reel2">
+                <div class="symbol seven"></div>
+                <div class="symbol grape"></div>
+                <div class="symbol orange"></div>
+                <div class="symbol apple"></div>
+                <div class="symbol bar"></div>
+            </div>
+            <div class="reel3">
+                <div class="symbol bar"></div>
+                <div class="symbol seven"></div>
+                <div class="symbol grape"></div>
+                <div class="symbol orange"></div>
+                <div class="symbol apple"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7) 왼손, 버튼, 오른손 -->
+    <div class="container">
+        <img src="./img/left_hand.png" alt="왼손" class="hand-img">
+        <input type="button" id="toggle">
+        <label for="toggle" class="button-label">
+            <img src="./img/before_click.png" alt="버튼" class="button-img">
+        </label>
+        <img src="./img/right_hand.png" alt="오른손" class="hand-img right-hand-img">
+    </div>
+
+    <!-- 8) NPC (옵저버) -->
+    <div class="observer">
+        <img src="./img/observer.png" class="observer-img" alt="옵저버">
+    </div>
+</div>
+</body>
 </html>

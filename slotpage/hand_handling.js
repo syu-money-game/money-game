@@ -8,13 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const rightHand = document.querySelector('.right-hand-img');
     const button = document.querySelector('.button-label');
 
-    if (!toggle || !rightHand || !button || !lever || !reel1 || !reel2 || !reel3) {
-        console.error('Missing elements:', {
-            toggle, rightHand, button, lever, reel1, reel2, reel3
-        });
-        return;
-    }
-
     let isSpinning = false;
 
     function spinReels() {
@@ -58,6 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isSpinning) {
             animateButtonAndHand();
             spinReels();
+        }
+    });
+
+    lever.addEventListener('click', () => {
+        if (!isSpinning) {
         }
     });
 });

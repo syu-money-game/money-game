@@ -8,14 +8,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const rightHand = document.querySelector('.right-hand-img');
     const button = document.querySelector('.button-label');
 
+    if (!toggle || !rightHand || !button || !lever || !reel1 || !reel2 || !reel3) {
+        console.error('Missing elements:', {
+            toggle, rightHand, button, lever, reel1, reel2, reel3
+        });
+        return;
+    }
+
     let isSpinning = false;
 
     function spinReels() {
         if (isSpinning) return;
         isSpinning = true;
 
+        // 버튼과 레버 비활성화
         toggle.disabled = true;
-        button.classList.add('disabled');
+        lever.classList.add('disabled');
 
         reel1.classList.add('spinning');
         reel2.classList.add('spinning');
@@ -30,9 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             reel3.classList.remove('spinning');
             isSpinning = false;
+            // 버튼과 레버 다시 활성화
             toggle.disabled = false;
-            button.classList.remove('disabled');
-
+            lever.classList.remove('disabled');
         }, stopTime3);
     }
 
@@ -47,10 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     toggle.addEventListener('click', () => {
-        animateButtonAndHand();
-        spinReels();
-    });
-
-    lever.addEventListener('click', () => {
+        if (!isSpinning) {
+            animateButtonAndHand();
+            spinReels();
+        }
     });
 });

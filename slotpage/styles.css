@@ -151,49 +151,6 @@
     justify-content: center;
 }
 
-.Batting-Bar {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 300px;
-    height: 50px;
-    padding: 5px;
-    bottom: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-
-
-}
-
-#battingInput {
-    width: 80%;
-    height: 80%;
-    font-size: 16pt;
-    text-align: center;
-    border: 2px solid #333;
-    border-radius: 5px;
-}
-
-#battingConfirm {
-    width: 80px;
-    height: 80%;
-    font-size: 14pt;
-    font-weight: bold;
-    background-color: #000000; /* 녹색 버튼 예시 */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#battingConfirm:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* 호버 시 색상 변경 */
-}
-
 /* Slot-machine CSS */
 @keyframes spinVertical {
     0% { transform: translateY(0); }
@@ -371,11 +328,11 @@
 }
 
 .button-label .button-img {
-    content: url('before_click.png');
+    content: url('img/before_click.png');
 }
 
 .button-pressed .button-img {
-    content: url('after_click.png');
+    content: url('img/after_click.png');
     transform: translateY(8px);
 }
 
@@ -393,3 +350,11 @@
     width: 200px;
 }
 
+
+/* 김민성 : NPC(감시자 css) */
+.observer-img {
+    position: absolute;
+    bottom: 20px;
+    width: 30%;
+
+}

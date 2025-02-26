@@ -34,6 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // 버튼과 레버 다시 활성화
             toggle.disabled = false;
             lever.classList.remove('disabled');
+
+            // 스핀 결과 처리
+            if (typeof spinResult === 'function') {
+                // TODO : slot_db.js 의 spinResult 함수 확률에 따른 가중치 추가 필요
+                spinResult();
+            }
+
         }, stopTime3);
     }
 
@@ -50,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.addEventListener('click', () => {
         if (!isSpinning) {
             animateButtonAndHand();
+            console.log(1)
             spinReels();
         }
     });

@@ -1,0 +1,400 @@
+/* css 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+
+/* background css */
+.background-img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Main_container css */
+.main-Container{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* health_bar css */
+@keyframes heartbeat {
+    0% {
+        transform: translateY(0);
+    }
+    10% {
+        transform: translateY(-5px);
+    }
+    20% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-3px);
+    }
+    40% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.heart:nth-child(1) { animation-delay: 0.3s; }
+.heart:nth-child(2) { animation-delay: 0.6s; }
+.heart:nth-child(3) { animation-delay: 0.9s; }
+
+.health-Bar{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 250px;
+    height: 100px;
+    left: 20px;
+}
+
+.heart {
+    width: 100px;
+    height: 100%;
+    background-image: url('./img/health_heart.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+    animation: heartbeat 5s linear infinite;
+}
+
+/* stage css */
+.stage-Bar{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    top: 100px;
+    left: 20px;
+    width: 250px;
+    height: 100px;
+    font-size: 40pt;
+    font-weight: bold;
+    color: white;
+    border-radius: 10px;
+}
+
+
+
+/* score css */
+.score-Bar {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40pt;
+    color: black;
+    font-weight: bold;
+}
+
+
+/* money-Bar css */
+.Money-Bar{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    width: 500px;
+    height: 200px;
+    top: 0;
+    right: 0;
+    color: black;
+    font-weight: bold;
+    background: rgb(206, 253, 164, 0.5);
+    border-radius: 10px;
+}
+
+.Money-Bar div > img{
+    position: absolute;
+    left: 10px;
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.Money-Bar div {
+    margin-top: 10px;
+}
+
+.Money-Bar div > span{
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: 35pt;
+}
+
+.current-moneyBar{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.batting-moneyBar{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.Batting-Bar{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    bottom: 15%;
+    left: 50%;
+    width: 350px;
+    height: 80px;
+    background: rgb(0,0,0, 0.7);
+    border-radius: 10px;
+}
+
+#battingInput {
+    height: 50%;
+    font-size: 16pt;
+    text-align: center;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 70%;
+}
+
+#battingConfirm {
+    width: 80px;
+    height: 50%;
+    font-size: 14pt;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+
+#battingConfirm:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Slot-machine CSS */
+@keyframes spinVertical {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-550px); }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.slot-Container {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.slot-Machine-img {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+}
+
+.lever{
+    position: absolute;
+    background-image: url("./img/lever.png");
+    top: 30%;
+    right: -5%;
+    width: 250px;
+    height: 250px;
+    z-index: 3;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.lever:hover{
+    animation: blink 0.5s infinite alternate;
+}
+
+.lever:active {
+    top:50%;
+    background-image: url("./img/PulledLever.png");
+}
+
+#slot-point1 {
+    display: inline-block; /* width, height 적용 가능 */
+    font-size: 30px;
+    color: red;
+    position: absolute;
+    left: 110px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#slot-point2{
+    display: inline-block; /* width, height 적용 가능 */
+    font-size: 30px;
+    color: red;
+    position: absolute;
+    right: 90px;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(180deg);
+
+}
+
+.reels {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    width: 600px;
+    height: 330px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.reel1, .reel2, .reel3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+    /*animation: spinVertical 0.5ms linear infinite;*/
+}
+
+.reel1:nth-child(1) { animation-delay: 0s; }
+.reel2:nth-child(2) { animation-delay: 1s; }
+.reel3:nth-child(3) { animation-delay: 2s; }
+
+.symbol {
+    width: 170px;
+    height: 230px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 20px; /* 세로 간격 추가 */
+}
+
+.symbol.grape { background-image: url('./img/grape.png'); }
+.symbol.orange { background-image: url('./img/orange.png'); }
+.symbol.apple { background-image: url('./img/apple.png'); }
+.symbol.bar { background-image: url('./img/bar.png'); }
+.symbol.seven { background-image: url('./img/7.png'); }
+
+/* 회전 애니메이션 클래스 */
+.spinning {
+    animation: spinVertical 0.7ms linear infinite; /* 0.5초 주기로 무한 반복 */
+}
+
+/* 릴 정지 시 부드럽게 멈추도록 전환 효과 */
+.reel1, .reel2, .reel3 {
+    transition: transform 0.3s ease-out; /* 부드러운 멈춤 효과 */
+}
+
+/* 회전하지 않을 때 위치 초기화 */
+.reel1:not(.spinning),
+.reel2:not(.spinning),
+.reel3:not(.spinning) {
+    transform: translateY(0); /* 기본 위치로 복귀 */
+}
+
+
+/* 버튼 css */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    overflow: visible;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.button-label {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.button-img {
+    width: 150px;
+    transition: all 0.5s ease-in-out;
+}
+
+.button-img:hover {
+    animation: blink 0.5s infinite alternate;
+}
+
+.button-label .button-img {
+    content: url('img/before_click.png');
+}
+
+.button-pressed .button-img {
+    content: url('img/after_click.png');
+    transform: translateY(8px);
+}
+
+.right-hand-img{
+    width: 200px;
+    transition: all 0.5ms ease-in-out;
+}
+
+.hand-moved{
+    transform: translate(-90px, -80px) rotate(-20deg);
+
+}
+
+.hand-img{
+    width: 200px;
+}
+
+
+/* 김민성 : NPC(감시자 css) */
+.observer-img {
+    position: absolute;
+    bottom: 20px;
+    width: 30%;
+}

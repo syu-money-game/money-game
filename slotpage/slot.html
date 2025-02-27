@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"></script>
     <script defer src="slot_db.js"></script>
-    <script defer src="hand_handling.js"></script>
+    <script defer src="slot_handling.js"></script>
     <script defer src="lever_handling.js"></script>
     <script defer src="betting.js"></script>
     <script defer src="slot.js"></script>
@@ -44,16 +44,16 @@
             <img class="current-money-img" src="./img/pocket.png" alt="돈주머니">
             <span id="currentMoney">0</span>
         </div>
-        <div class="batting-moneyBar">
-            <img class="batting-money-img" src="./img/batting-Money.png" alt="배팅머니">
-            <span id="battingMoney">0</span>
+        <div class="betting-moneyBar">
+            <img class="betting-money-img" src="./img/betting-Money.png" alt="배팅머니">
+            <span id="bettingMoney">0</span>
         </div>
     </div>
 
     <!-- 5) 배팅 금액 입력 -->
-    <div class="Batting-Bar">
-        <input type="number" id="battingInput" placeholder="배팅 금액 입력" min="1">
-        <button id="battingConfirm">확인</button>
+    <div class="betting-Bar">
+        <input type="text" id="bettingInput" placeholder="배팅 금액 입력" min="1">
+        <button id="bettingConfirm">확인</button>
     </div>
 
     <!-- 6) 슬롯머신 본체 -->
@@ -90,10 +90,7 @@
     <!-- 7) 왼손, 버튼, 오른손 -->
     <div class="container">
         <img src="./img/left_hand.png" alt="왼손" class="hand-img">
-        <input type="button" id="toggle">
-        <label for="toggle" class="button-label">
             <img src="./img/before_click.png" alt="버튼" class="button-img">
-        </label>
         <img src="./img/right_hand.png" alt="오른손" class="hand-img right-hand-img">
     </div>
 

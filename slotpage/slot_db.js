@@ -124,6 +124,8 @@ function loseHeart() {
     }
 }
 
+// TODO : 배당금을 유저의 총금액에 더해줘야 함.
+
 /** 점수 추가 -> 스테이지 목표 도달 시 스테이지 업 / 마지막 스테이지면 게임 종료 */
 function addScore(amount) {
     score += amount;
@@ -134,6 +136,7 @@ function addScore(amount) {
 /** stage_goals에 따른 스테이지 변경 */
 function checkStage() {
     // 3단계(목표: 100000000) 도달 -> 게임 종료 -> startpage
+    // TODO : 스테이지 이동 시 score 초기화
     if (score >= 100000000 && stage_id < 3) {
         stage_id = 3;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
@@ -175,6 +178,7 @@ function spinResult() {
     // TODO : 승리 확률/가중치에 맞게 수정
     // TODO : 돈을 잃고 더 이상 배팅 할 금액이 없어지는 경우 게임 종료
     const randomWin = Math.floor(Math.random() * 50000); // 0 ~ 49999
+    console.log(2)
     addScore(randomWin);
 
     // TODO : NPC에게 걸릴 확률/가중치에 맞게 수정

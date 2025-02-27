@@ -143,7 +143,7 @@ function checkStage() {
         updateUI();
     }
     // 1단계(목표: 1000000) 도달
-    else if (score >= 10000000 && stage_id < 2) {
+    else if (score >= 1000000 && stage_id < 2) {
         stage_id = 2;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 1 클리어! Stage 2로 이동합니다.");

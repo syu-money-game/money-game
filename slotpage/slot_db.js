@@ -122,7 +122,7 @@ function spinResult(result1, result2, result3) {
 
 function checkStage() {
     // 3단계(목표: 100000000) 도달 -> 게임 종료 -> startpage
-    if (score >= 100000000 && stage_id < 3) {
+    if (score >= 100000000 && stage_id === 3) {
         stage_id = 3;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 3 클리어! 민성이는 인생 역전에 성공했습니다!!");

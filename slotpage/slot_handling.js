@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         isSpinning = true;
+        playSoundEffect("SlotSFX")
         button.classList.add('disabled');
         lever.classList.add('disabled');
 
@@ -116,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             if (typeof window.spinResult === 'function') {
                 window.spinResult(finalResult1, finalResult2, finalResult3);
-            }
+            } stopSoundEffect("SlotSFX");
         }, 5300);
     }
 
@@ -131,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', () => {
         if (!isSpinning && !button.classList.contains('disabled')) {
+            playSoundEffect("BtnSFX")
             animateButtonAndHand();
             console.log(1);
             spinReels();

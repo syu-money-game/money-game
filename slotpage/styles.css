@@ -69,6 +69,10 @@
     animation: heartbeat 5s linear infinite;
 }
 
+.empty {
+    background-image: url("./img/blankheart.png");
+}
+
 /* stage css */
 .stage-Bar{
     position: absolute;

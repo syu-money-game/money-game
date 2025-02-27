@@ -69,6 +69,10 @@
     animation: heartbeat 5s linear infinite;
 }
 
+.empty {
+    background-image: url("./img/blankheart.png");
+}
+
 /* stage css */
 .stage-Bar{
     position: absolute;
@@ -144,11 +148,52 @@
     margin-bottom: 25px;
 }
 
-.batting-moneyBar{
+.betting-moneyBar{
     display: flex;
     text-align: center;
     align-items: center;
     justify-content: center;
+}
+
+.betting-Bar{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    bottom: 15%;
+    left: 50%;
+    width: 350px;
+    height: 80px;
+    background: rgb(0,0,0, 0.7);
+    border-radius: 10px;
+}
+
+#bettingInput {
+    height: 50%;
+    font-size: 16pt;
+    text-align: center;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 70%;
+}
+
+#bettingConfirm {
+    width: 80px;
+    height: 50%;
+    font-size: 14pt;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+
+#bettingConfirm:hover {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Slot-machine CSS */
@@ -286,7 +331,12 @@
 .reel1:not(.spinning),
 .reel2:not(.spinning),
 .reel3:not(.spinning) {
-    transform: translateY(0); /* 기본 위치로 복귀 */
+    animation: none; /* 애니메이션 제거 */
+}
+
+.symbol.active {
+    background-color: #ffd700; /* 승리 시 강조 */
+    border: 2px solid #ff4500;
 }
 
 
@@ -297,54 +347,10 @@
     justify-content: center;
     gap: 10px;
     position: absolute;
-    left: 50%;      
-    bottom: 20px;      
-    transform: translateX(-50%); 
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
     overflow: visible;
-}
-
-.button-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-}
-
-/*.button-img {*/
-/*    width: 150px; !* 버튼 크기 살짝 증가 *!*/
-/*    transition: transform 0.5s ease-in-out;*/
-/*}*/
-
-/*.hand-img {*/
-/*    width: 200px; !* 손 크기 증가 *!*/
-/*    transition: transform 0.3s ease-in-out;*/
-/*    position: relative;*/
-/*}*/
-
-/*!* 클릭 전 상태 *!*/
-/*.button-label .button-img {*/
-/*    content: url('before_click.png');*/
-/*}*/
-
-/* !* 클릭 후 버튼 변경 *!*/
-/* #toggle:active + .button-label img {*/
-/*    content: url('after_click.png');*/
-/*    position: relative;*/
-/*    top: 8px;*/
-
-/*}*/
-
-/*!* 클릭 후 오른손 이동 및 반시계 방향 20도 회전 *!*/
-/*#toggle:active ~ .hand-img {*/
-/*    transform: translate(-90px, -80px) rotate(-20deg); !* 왼쪽 이동 + 위쪽 이동 + 반시계 방향 회전 *!*/
-/*}*/
-
-.button-label {
-    border: none;
-    background: none;
-    padding: 0;
-    cursor: pointer;
-    display: inline-block;
 }
 
 .button-img {
@@ -357,23 +363,32 @@
 }
 
 .button-label .button-img {
-    content: url('before_click.png');
+    content: url('img/before_click.png');
 }
 
 .button-pressed .button-img {
-    content: url('after_click.png');
+    content: url('img/after_click.png');
     transform: translateY(8px);
 }
 
 .right-hand-img{
     width: 200px;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5ms ease-in-out;
 }
 
 .hand-moved{
     transform: translate(-90px, -80px) rotate(-20deg);
+
 }
 
 .hand-img{
     width: 200px;
+}
+
+
+/* 김민성 : NPC(감시자 css) */
+.observer-img {
+    position: absolute;
+    bottom: 20px;
+    width: 30%;
 }

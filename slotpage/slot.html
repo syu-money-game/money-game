@@ -2,52 +2,61 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>슬롯머신</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>슬롯머신</title>
     <script src="https://kit.fontawesome.com/93236c49f3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"></script>
     <script defer src="slot_db.js"></script>
-
-    <!-- 기존 핸들/버튼 애니메이션 로직 -->
-    <script defer src="hand_handling.js"></script>
+    <script defer src="slot_handling.js"></script>
+    <script defer src="lever_handling.js"></script>
+    <script defer src="betting.js"></script>
+    <script defer src="slot.js"></script>
 </head>
 <body>
+<!-- 배경 이미지 -->
 <img src="./img/background.png" class="background-img" alt="배경이미지">
 
+<!-- 메인 컨테이너 -->
 <div class="main-Container">
-
-    <!-- 1) livepoint(하트) 영역 -->
+    <!-- 1) 하트 (목숨) 영역 -->
     <div class="health-Bar">
         <div class="heart" id="heart1"></div>
         <div class="heart" id="heart2"></div>
         <div class="heart" id="heart3"></div>
+<!--        <button onclick="decreaseHealth()">체력 감소</button> &lt;!&ndash; 하트 감소 동작 확인용&ndash;&gt;-->
     </div>
 
-    <!-- 2) stage_id(스테이지) 표시 -->
+    <!-- 2) 스테이지 표시 -->
     <div class="stage-Bar">
         STAGE: <span id="stage">0</span>
     </div>
 
-    <!-- 3) score(스코어) 표시 -->
+    <!-- 3) 스코어 표시 -->
     <div class="score-Bar">
         SCORE: <span id="score">0</span>
     </div>
 
-    <!-- 4) 소지금(balance) & 배팅금액(bet_amount) 표시 -->
+    <!-- 4) 소지금 & 배팅금액 표시 -->
     <div class="Money-Bar">
         <div class="current-moneyBar">
             <img class="current-money-img" src="./img/pocket.png" alt="돈주머니">
             <span id="currentMoney">0</span>
         </div>
-        <div class="batting-moneyBar">
-            <img class="batting-money-img" src="./img/batting-Money.png" alt="배팅머니">
-            <span id="battingMoney">0</span>
+        <div class="betting-moneyBar">
+            <img class="betting-money-img" src="./img/betting-Money.png" alt="배팅머니">
+            <span id="bettingMoney">0</span>
         </div>
     </div>
 
-    <!-- 5) 슬롯머신 본체 -->
+    <!-- 5) 배팅 금액 입력 -->
+    <div class="betting-Bar">
+        <input type="text" id="bettingInput" placeholder="배팅 금액 입력" min="1">
+        <button id="bettingConfirm">확인</button>
+    </div>
+
+    <!-- 6) 슬롯머신 본체 -->
     <div class="slot-Container">
         <img class="slot-Machine-img" src="./img/slot-machine.png" alt="슬롯머신">
         <i class="fa-solid fa-play" id="slot-point1"></i>
@@ -78,19 +87,17 @@
         </div>
     </div>
 
-    <!-- 6) 왼손, 버튼, 오른손 -->
+    <!-- 7) 왼손, 버튼, 오른손 -->
     <div class="container">
-        <img src="left_hand.png" alt="왼손" class="hand-img">
-
-        <!-- (기존) 버튼용 input + label -->
-        <input type="button" id="toggle">
-        <label for="toggle" class="button-label">
-            <img src="before_click.png" alt="버튼" class="button-img">
-        </label>
-
-        <img src="right_hand.png" alt="오른손" class="hand-img right-hand-img">
+        <img src="./img/left_hand.png" alt="왼손" class="hand-img">
+            <img src="./img/before_click.png" alt="버튼" class="button-img">
+        <img src="./img/right_hand.png" alt="오른손" class="hand-img right-hand-img">
     </div>
 
+    <!-- 8) NPC (옵저버) -->
+    <div class="observer">
+        <img src="./img/observer.png" class="observer-img" alt="옵저버">
+    </div>
 </div>
 </body>
 </html>

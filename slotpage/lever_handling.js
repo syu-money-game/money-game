@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (randomChance < 0) {
             console.log("Observer detected the lever!");
             observer.src = "img/observer_active.png";
+            playSoundEffect("HurtSFX")
             decreaseHealth(); // 체력 감소
             setTimeout(() => {
                 observer.src = "img/observer.png";
@@ -32,5 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lever.addEventListener('mousedown', () => {
         detectLeverActivation();
+        playSoundEffect("LeverSFX")
+
     });
 });

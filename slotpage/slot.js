@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let shouldPlayInGameBg = sessionStorage.getItem("playInGameBg") === "true";
 
     if (shouldPlayInGameBg) {
-        inGameBg.volume = 1.0;
+        inGameBg.volume = 0.5;
         inGameBg.play().then(() => {
             console.log("재생 성공");
         }).catch(error => {
@@ -53,3 +53,23 @@ function gameOver() {
 
     window.location.href = "../gameoverpage/gameover.html";
 }
+
+// 게임 내 효과음
+function playSoundEffect(audioId) {
+    let audio = document.getElementById(audioId);
+    if (audio) {
+        audio.volume = 1.0;
+        audio.currentTime = 0;
+        audio.play().catch(error => console.error(`${audioId} 효과음 재생 실패:`, error));
+    }
+}
+
+function stopSoundEffect(audioId) {
+    let audio = document.getElementById(audioId);
+    if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+}
+
+

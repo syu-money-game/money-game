@@ -38,7 +38,7 @@ function createTables() {
                                             balance REAL DEFAULT 0,
                                             livepoint INTEGER DEFAULT 3,
                                             stage_id INTEGER DEFAULT 1,
-                                            score REAL DEFAULT 0,
+                                            score INTEGER DEFAULT 0,
                                             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         );
     `);
@@ -55,14 +55,12 @@ function createTables() {
 
 function createNewUser() {
     db.run(`
-        INSERT INTO user (username, balance, livepoint, stage_id, score)
+        INSERT INTO user (username, balance, livepoint, stage_id)
         VALUES (
                    'Player' || (SELECT IFNULL(MAX(user_id), 0) + 1 FROM user),
                    300000,
                    3,
-                   1,
-                   0
-               )
+                   1               )
     `);
     const result = db.exec(`SELECT last_insert_rowid() AS new_id`);
     user_id = result.length > 0 && result[0].values.length > 0 ? result[0].values[0][0] : 1;
@@ -123,19 +121,38 @@ function spinResult(result1, result2, result3) {
 }
 
 function checkStage() {
-    if (score >= 100000000 && stage_id < 3) {
+    // 3단계(목표: 100000000) 도달 -> 게임 종료 -> startpage
+    if (score >= 100000000 && stage_id === 3) {
         stage_id = 3;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 3 클리어! 민성이는 인생 역전에 성공했습니다!!");
         window.location.href = "../startpage/title.html";
         window.leverBoost = 0; // 스테이지 클리어 시 초기화
         window.forceTripleMatch = false; // 스테이지 클리어 시 초기화
-    } else if (score >= 10000000 && stage_id < 2) {
+    }
+    // 2단계(목표: 10000000) 도달
+    else if (score >= 10000000 && stage_id < 3) {
+        stage_id = 3;
+        db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
+        alert("Stage 2 클리어! Stage 3로 이동합니다.");
+
+        window.leverBoost = 0; // 스테이지 클리어 시 초기화
+        window.forceTripleMatch = false; // 스테이지 클리어 시 초기화
+        // 스코어 초기화
+        score = 0;
+        updateUI();
+    }
+    // 1단계(목표: 1000000) 도달
+    else if (score >= 1000000 && stage_id < 2) {
         stage_id = 2;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 1 클리어! Stage 2로 이동합니다.");
         window.leverBoost = 0; // 스테이지 변경 시 초기화
         window.forceTripleMatch = false; // 스테이지 변경 시 초기화
+
+        // 스코어 초기화
+        score = 0;
+        updateUI();
     }
 }
 

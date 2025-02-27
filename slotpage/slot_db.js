@@ -112,9 +112,10 @@ function spinResult(result1, result2, result3) {
 
     if (balance <= 0) {
         alert("돈이 떨어졌습니다! 게임 오버!");
-        window.location.href = "../startpage/title.html";
+        // window.location.href = "../startpage/title.html";
         window.leverBoost = 0; // 게임 오버 시 초기화
         window.forceTripleMatch = false; // 게임 오버 시 초기화
+        gameOver();
     }
 
     checkStage(); // 스테이지 업데이트

@@ -155,6 +155,47 @@
     justify-content: center;
 }
 
+.Batting-Bar{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    bottom: 15%;
+    left: 50%;
+    width: 350px;
+    height: 80px;
+    background: rgb(0,0,0, 0.7);
+    border-radius: 10px;
+}
+
+#battingInput {
+    height: 50%;
+    font-size: 16pt;
+    text-align: center;
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 70%;
+}
+
+#battingConfirm {
+    width: 80px;
+    height: 50%;
+    font-size: 14pt;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+
+}
+
+#battingConfirm:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 /* Slot-machine CSS */
 @keyframes spinVertical {
     0% { transform: translateY(0); }
@@ -257,7 +298,6 @@
     /*animation: spinVertical 0.5ms linear infinite;*/
 }
 
-
 .reel1:nth-child(1) { animation-delay: 0s; }
 .reel2:nth-child(2) { animation-delay: 1s; }
 .reel3:nth-child(3) { animation-delay: 2s; }
@@ -277,16 +317,34 @@
 .symbol.bar { background-image: url('./img/bar.png'); }
 .symbol.seven { background-image: url('./img/7.png'); }
 
+/* 회전 애니메이션 클래스 */
+.spinning {
+    animation: spinVertical 0.7ms linear infinite; /* 0.5초 주기로 무한 반복 */
+}
 
+/* 릴 정지 시 부드럽게 멈추도록 전환 효과 */
+.reel1, .reel2, .reel3 {
+    transition: transform 0.3s ease-out; /* 부드러운 멈춤 효과 */
+}
+
+/* 회전하지 않을 때 위치 초기화 */
+.reel1:not(.spinning),
+.reel2:not(.spinning),
+.reel3:not(.spinning) {
+    transform: translateY(0); /* 기본 위치로 복귀 */
+}
+
+
+/* 버튼 css */
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     position: absolute;
-    left: 50%;      
-    bottom: 20px;      
-    transform: translateX(-50%); 
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
     overflow: visible;
 }
 
@@ -297,36 +355,50 @@
     position: relative;
 }
 
+.button-label {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-block;
+}
+
 .button-img {
-    width: 150px; /* 버튼 크기 살짝 증가 */
-    transition: transform 0.1s ease-in-out;
+    width: 150px;
+    transition: all 0.5s ease-in-out;
 }
 
-.hand-img {
-    width: 200px; /* 손 크기 증가 */
-    transition: transform 0.1s ease-in-out;
-    position: relative;
+.button-img:hover {
+    animation: blink 0.5s infinite alternate;
 }
 
-/* 체크박스 숨기기 */
-#toggle {
-    display: none;
+.button-label .button-img {
+    content: url('img/before_click.png');
 }
 
-/* 클릭 전 상태 */
-.button-label img {
-    content: url('before_click.png');
+.button-pressed .button-img {
+    content: url('img/after_click.png');
+    transform: translateY(8px);
 }
 
- /* 클릭 후 버튼 변경 */
- #toggle:checked + .button-label img {
-    content: url('after_click.png');
-    position: relative;
-    top: 8px;
-    
+.right-hand-img{
+    width: 200px;
+    transition: all 0.5ms ease-in-out;
 }
 
-/* 클릭 후 오른손 이동 및 반시계 방향 20도 회전 */
-#toggle:checked ~ .hand-img {
-    transform: translate(-90px, -80px) rotate(-20deg); /* 왼쪽 이동 + 위쪽 이동 + 반시계 방향 회전 */
+.hand-moved{
+    transform: translate(-90px, -80px) rotate(-20deg);
+
+}
+
+.hand-img{
+    width: 200px;
+}
+
+
+/* 김민성 : NPC(감시자 css) */
+.observer-img {
+    position: absolute;
+    bottom: 20px;
+    width: 30%;
 }

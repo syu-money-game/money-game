@@ -1,4 +1,20 @@
 // 이소영 : 체력 감소 & 감소 시 게임 오버 시작
+document.addEventListener('DOMContentLoaded', function () {
+    inGameBg = document.getElementById("inGameBg");
+    let shouldPlayInGameBg = sessionStorage.getItem("playInGameBg") === "true";
+
+    if (shouldPlayInGameBg) {
+        inGameBg.volume = 0.5;
+        inGameBg.play().then(() => {
+            // console.log("재생 성공");
+        }).catch(error => {
+            // console.error("실패:", error);
+        });
+
+        sessionStorage.removeItem("playInGameBg");
+    }
+})
+
 let maxHealth = 3; // 최대 체력
 let currentHealth = maxHealth; // 현재 체력
 
@@ -15,19 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("click", playBgm);
 });
 
-
+// 체력 감소 함수
 function decreaseHealth() {
     if (currentHealth > 0) {
         currentHealth--; // 체력 감소
         updateHealthBar();
-
     }
-
     if (currentHealth === 0) {
         gameOver(); // 체력이 0이면 게임 오버 처리
     }
 }
 
+// 체력 로직 함수
 function updateHealthBar() {
     const hearts = document.querySelectorAll('.heart');
     hearts.forEach((heart, index) => {
@@ -41,22 +56,6 @@ function updateHealthBar() {
 // 이소영 : 체력 감소 & 감소 시 게임 오버 끝
 
 let inGameBg;
-
-document.addEventListener('DOMContentLoaded', function () {
-    inGameBg = document.getElementById("inGameBg");
-    let shouldPlayInGameBg = sessionStorage.getItem("playInGameBg") === "true";
-
-    if (shouldPlayInGameBg) {
-        inGameBg.volume = 0.5;
-        inGameBg.play().then(() => {
-            // console.log("재생 성공");
-        }).catch(error => {
-            // console.error("실패:", error);
-        });
-
-        sessionStorage.removeItem("playInGameBg");
-    }
-})
 
 function gameOver() {
     inGameBg.pause();

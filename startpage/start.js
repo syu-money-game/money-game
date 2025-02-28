@@ -18,20 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const bgm = document.getElementById("bgMusic");
-
-        const playBgm = () => {
-            if (bgm.paused) {
-                bgm.play().catch(error => console.log("Autoplay failed: ", error));
-                document.removeEventListener("click", playBgm);
-            }
-        };
-
-        document.addEventListener("click", playBgm);
-    });
-
-
     // Enter 키를 누르면 페이지 이동
     document.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {

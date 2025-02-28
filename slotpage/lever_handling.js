@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return 0.10; // 기본값 (Stage 1과 동일)
     }
 
+
     function updateProbabilityMessage(message, type = "default") {
         // 기존 클래스 제거 후 새로운 클래스 추가
         probabilityControl.classList.remove("max-boost", "danger");

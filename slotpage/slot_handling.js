@@ -1,4 +1,5 @@
 // script.js
+// 심볼 선언과 동시에 이미지와 가중치(슬롯에 나올 확률)를 부여
 const symbols = [
     { name: 'grape', weight: 60, image: './img/grape.png' },
     { name: 'orange', weight: 60, image: './img/orange.png' },
@@ -7,8 +8,8 @@ const symbols = [
     { name: 'seven', weight: 10, image: './img/seven.png' },
 ];
 
+// 심볼 확률조작 함수: 레버를 당겨 확률이 100%가 되었을 때 심볼을 랜덤하게 등장하게 하면서도 무조건 적으로 동일한 심볼만 나오게 함
 function getRandomSymbol() {
-    // 10번 성공 시 강제로 같은 심볼 3개 반환
     if (window.forceTripleMatch) {
         const forcedSymbols = ['grape', 'orange', 'apple', 'bar', 'seven'];
         const randomSymbol = forcedSymbols[Math.floor(Math.random() * forcedSymbols.length)];
@@ -36,6 +37,7 @@ function getRandomSymbol() {
     }
 }
 
+// 조작한 심볼을 적용하는 함수
 function updateReelSymbols(reel) {
     const symbolElements = reel.querySelectorAll('.symbol');
     symbolElements.forEach(element => {
@@ -43,6 +45,7 @@ function updateReelSymbols(reel) {
     });
 }
 
+// 이벤트에 따른 애니메이션 동적 제어
 document.addEventListener('DOMContentLoaded', () => {
     const reel1 = document.querySelector('.reel1');
     const reel2 = document.querySelector('.reel2');

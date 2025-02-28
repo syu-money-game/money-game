@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             finalResult1 = finalResult2 = finalResult3 = getRandomSymbol(); // 강제 동일 심볼
         } else {
             const boost = window.leverBoost || 0;
-            const sameSymbolChance = boost / 100;
+            const sameSymbolChance = boost / 100 * 5;
             if (Math.random() < Math.min(sameSymbolChance, 1)) {
                 // 부스트 적용 시 동일 심볼로 강제 설정
                 const randomIndex = Math.floor(Math.random() * symbols.length);

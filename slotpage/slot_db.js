@@ -155,7 +155,6 @@ function checkStage() {
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 3 클리어! 민성이는 인생 역전에 성공했습니다!!");
         window.location.href = "../startpage/title.html";
-        window.leverBoost = 0; // 스테이지 클리어 시 초기화
         window.forceTripleMatch = false; // 스테이지 클리어 시 초기화
     }
     // 2단계(목표: 10000000) 도달
@@ -164,9 +163,10 @@ function checkStage() {
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 2 클리어! Stage 3로 이동합니다.");
 
-        window.leverBoost = 0; // 스테이지 클리어 시 초기화
         window.forceTripleMatch = false; // 스테이지 클리어 시 초기화
         // 스코어 초기화
+        window.successCount = 0; // 디비 없이 메모리에서 초기화
+        window.leverBoost = 0;
         score = 0;
         updateUI();
     }
@@ -175,9 +175,9 @@ function checkStage() {
         stage_id = 2;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 1 클리어! Stage 2로 이동합니다.");
-        window.leverBoost = 0; // 스테이지 변경 시 초기화
         window.forceTripleMatch = false; // 스테이지 변경 시 초기화
-
+        window.leverBoost = 0; // 디비 없이 메모리에서 초기화
+        window.successCount = 0; // 디비 없이 메모리에서 초기화
         // 스코어 초기화
         score = 0;
         updateUI();

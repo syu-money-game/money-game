@@ -1,62 +1,59 @@
 document.addEventListener("DOMContentLoaded", () => {
     const observer = document.querySelector(".observer-img");
     const lever = document.querySelector(".lever");
-    const probabilityControl = document.getElementById("probability-control"); // ✅ span 요소 가져오기
+    const probabilityControl = document.getElementById("probability-control");
 
-    let successCount = 0; // 레버 성공 횟수
-    window.leverBoost = 0.0; // 같은 심볼 확률 증가 (0~100%)
+    window.successCount = 0; // 전역 변수
+    window.leverBoost = 0; // 전역 변수
 
     function getObserverDetectionRate() {
-        if (stage_id === 1) return 0.10; // 10% 확률로 감지
-        if (stage_id === 2) return 0.48; // 48% 확률로 감지
-        if (stage_id === 3) return 0.60; // 60% 확률로 감지
-        return 0.10; // 기본값 (Stage 1과 동일)
+        if (stage_id === 1) return 0.10;
+        if (stage_id === 2) return 0.48;
+        if (stage_id === 3) return 0.60;
+        return 0.10;
     }
 
-
     function updateProbabilityMessage(message, type = "default") {
-        // 기존 클래스 제거 후 새로운 클래스 추가
         probabilityControl.classList.remove("max-boost", "danger");
         if (type === "danger") {
-            probabilityControl.classList.add("danger"); // 감시자에게 걸렸을 때 (빨간색)
+            probabilityControl.classList.add("danger");
         } else if (type === "max-boost") {
-            probabilityControl.classList.add("max-boost"); // 10번 성공했을 때 (주황색)
+            probabilityControl.classList.add("max-boost");
         }
 
         probabilityControl.innerHTML = message.replace(
-            /\(\d+%\)/g, // 정규식으로 숫자% 찾기
-            '<span class="probability-number">$1</span>' // ✅ 숫자는 항상 같은 스타일 유지
+            /\(\d+%\)/g,
+            '<span class="probability-number">$1</span>'
         );
     }
 
     function detectLeverActivation() {
-        const observerDetectionRate = getObserverDetectionRate(); // 현재 Stage의 감시 확률 적용
+        const observerDetectionRate = getObserverDetectionRate();
         const randomChance = Math.random();
 
         if (randomChance < observerDetectionRate) {
             observer.src = "img/observer_active.png";
             playSoundEffect("HurtSFX");
-            decreaseHealth(); // 체력 감소
+            decreaseHealth();
             updateProbabilityMessage("⚠ 감시자에게 들켰습니다! 체력이 감소합니다.", "danger");
             setTimeout(() => {
                 observer.src = "img/observer.png";
-                probabilityControl.textContent = ""; // 2초 후 메시지 제거
+                probabilityControl.textContent = "";
             }, 2000);
         } else {
-            successCount++;
+            window.successCount++;
             const prevBoost = window.leverBoost;
-            window.leverBoost = Math.min(successCount * 10, 100); // 10%씩 증가, 최대 100%
-            console.log(`Lever Success: Boost increased to ${window.leverBoost}%`); // 추가 로그
+            window.leverBoost = Math.min(window.successCount * 10, 100);
 
             if (window.leverBoost > prevBoost) {
-                updateProbabilityMessage(`🎉 레버 성공! 확률 증가: ${window.leverBoost}%`, successCount >= 10 ? "max-boost" : "default");
-                setTimeout(() => probabilityControl.textContent = "", 2000); // 2초 후 메시지 제거 (60% 이상도 동일 적용)
+                updateProbabilityMessage(`🎉 레버 성공! 확률 증가: ${window.leverBoost}%`, window.successCount >= 10 ? "max-boost" : "default");
+                setTimeout(() => probabilityControl.textContent = "", 2000);
             }
 
-            if (successCount >= 10) {
+            if (window.successCount >= 10) {
                 window.forceTripleMatch = true;
                 updateProbabilityMessage("🔥 10번 연속 성공! 강제 트리플 매치 활성화!", "max-boost");
-                setTimeout(() => probabilityControl.textContent = "", 3000); // 3초 후 메시지 제거
+                setTimeout(() => probabilityControl.textContent = "", 3000);
             }
         }
     }

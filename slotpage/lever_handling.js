@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (randomChance < observerDetectionRate) {
             // ✅ 감시자에게 걸렸을 때 (빨간색)
-            console.log(`Observer detected the lever! Detection Rate: ${observerDetectionRate * 100}%`);
+            // console.log(`Observer detected the lever! Detection Rate: ${observerDetectionRate * 100}%`);
             observer.src = "img/observer_active.png";
             playSoundEffect("HurtSFX");
             decreaseHealth(); // 체력 감소
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const prevBoost = window.leverBoost;
             window.leverBoost = Math.min(successCount * 10, 100); // 10%씩 증가, 최대 100%
 
-            console.log(`Lever success! Boost: ${window.leverBoost}%, Success Count: ${successCount}`);
+            // console.log(`Lever success! Boost: ${window.leverBoost}%, Success Count: ${successCount}`);
 
             // ✅ 확률 증가 메시지 표시 (10% 단위로 증가할 때만)
             if (window.leverBoost > prevBoost) {
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // ✅ 10번 성공 시 강제 트리플 매치 (진한 오렌지색)
             if (successCount >= 10) {
-                console.log("10 successes achieved! Forcing triple match.");
+                // console.log("10 successes achieved! Forcing triple match.");
                 window.forceTripleMatch = true;
                 updateProbabilityMessage("🔥 10번 연속 성공! 강제 트리플 매치 활성화!", "max-boost");
                 setTimeout(() => probabilityControl.textContent = "", 3000); // 3초 후 메시지 제거

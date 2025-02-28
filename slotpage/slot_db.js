@@ -34,7 +34,7 @@ async function initDatabase() {
         updateUI();
 
     } catch (error) {
-        console.error("데이터베이스 초기화 중 오류 발생:", error);
+        // console.error("데이터베이스 초기화 중 오류 발생:", error);
     }
 }
 
@@ -67,11 +67,11 @@ function loadOrCreateUser() {
         stage_id = userData[4];
         score = userData[5];
 
-        console.log(`기존 유저 로드됨: ID=${user_id}, 이름=${username}, 잔액=${balance}`);
+        // console.log(`기존 유저 로드됨: ID=${user_id}, 이름=${username}, 잔액=${balance}`);
         document.getElementById("username").textContent = username; // ✅ username 표시
     } else {
         // 📌 유저가 없으면 새로 생성
-        console.log("유저가 존재하지 않음. 새 유저 생성...");
+        // console.log("유저가 존재하지 않음. 새 유저 생성...");
         createNewUser();
     }
 }
@@ -89,7 +89,7 @@ function createNewUser() {
     const newUserResult = db.exec(`SELECT last_insert_rowid() AS new_id`);
     if (newUserResult.length > 0 && newUserResult[0].values.length > 0) {
         user_id = newUserResult[0].values[0][0];
-        console.log(`새 유저 생성 완료! ID=${user_id}, 이름=${username}`);
+        // console.log(`새 유저 생성 완료! ID=${user_id}, 이름=${username}`);
     }
 
     document.getElementById("username").textContent = username; // ✅ username 표시
@@ -124,7 +124,7 @@ function placeBet(amount) {
 }
 
 function spinResult(result1, result2, result3) {
-    console.log(`Spin Result: ${result1}, ${result2}, ${result3}`);
+    // console.log(`Spin Result: ${result1}, ${result2}, ${result3}`);
 
     if (result1 === result2 && result2 === result3) {
         const payoutMultiplier = SYMBOLS[result1].payout;

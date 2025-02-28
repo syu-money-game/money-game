@@ -1,7 +1,20 @@
 // 이소영 : 체력 감소 & 감소 시 게임 오버 시작
-
 let maxHealth = 3; // 최대 체력
 let currentHealth = maxHealth; // 현재 체력
+
+document.addEventListener("DOMContentLoaded", () => {
+    const bgm = document.getElementById("inGameBg");
+
+    const playBgm = () => {
+        if (bgm.paused) {
+            bgm.play().catch(error => console.log("Autoplay failed: ", error));
+            document.removeEventListener("click", playBgm);
+        }
+    };
+
+    document.addEventListener("click", playBgm);
+});
+
 
 function decreaseHealth() {
     if (currentHealth > 0) {
@@ -36,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (shouldPlayInGameBg) {
         inGameBg.volume = 0.5;
         inGameBg.play().then(() => {
-            console.log("재생 성공");
+            // console.log("재생 성공");
         }).catch(error => {
-            console.error("실패:", error);
+            // console.error("실패:", error);
         });
 
         sessionStorage.removeItem("playInGameBg");
@@ -61,6 +74,7 @@ function playSoundEffect(audioId) {
         audio.volume = 1.0;
         audio.currentTime = 0;
         audio.play().catch(error => console.error(`${audioId} 효과음 재생 실패:`, error));
+
     }
 }
 

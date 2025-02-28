@@ -7,9 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
     if (shouldPlayGameOverBg) {
         gameOverBg.volume = 1.0;
         gameOverBg.play().then(() => {
-            console.log("배경 재생 성공");
+            // console.log("배경 재생 성공");
         }).catch(error => {
-            console.error("실패:", error);
+            // console.error("실패:", error);
         });
     }
 

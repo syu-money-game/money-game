@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+
 /* css 리셋 */
 * {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family: 'Jersey 15', sans-serif;
 }
 
 
@@ -69,6 +74,28 @@
     animation: heartbeat 5s linear infinite;
 }
 
+
+.username-bar {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    top: 10px;
+    left: 13%;
+    min-width: 250px; /* 최소 너비 설정 */
+    max-width: 90%; /* 너무 길어지지 않도록 최대 너비 설정 */
+    height: 100px;
+    font-size: 30pt;
+    /*!*font-weight: bold;*!*/
+    color: white;
+    border-radius: 10px;
+    padding: 0 20px; /* 내부 여백 추가 */
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+
 .empty {
     background-image: url("./img/blankheart.png");
 }
@@ -86,11 +113,10 @@
     width: 250px;
     height: 100px;
     font-size: 40pt;
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: white;
     border-radius: 10px;
 }
-
 
 
 /* score css */
@@ -99,9 +125,9 @@
     top: 5px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 40pt;
+    font-size: 60pt;
     color: black;
-    font-weight: bold;
+    /*!*font-weight: bold;*!*/
 }
 
 
@@ -117,7 +143,7 @@
     top: 0;
     right: 0;
     color: black;
-    font-weight: bold;
+    /*font-weight: bold;*/
     background: rgb(206, 253, 164, 0.5);
     border-radius: 10px;
 }
@@ -136,8 +162,8 @@
 
 .Money-Bar div > span{
     margin-left: 50px;
-    font-weight: bold;
-    font-size: 35pt;
+    /*font-weight: bold;*/
+    font-size: 45pt;
 }
 
 .current-moneyBar{
@@ -154,6 +180,59 @@
     align-items: center;
     justify-content: center;
 }
+
+.probability-bar{
+    font-family: 'Pixelify Sans', sans-serif;
+    position: absolute;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 100px;
+    top: 18%;
+    right: 0;
+    color: black;
+    font-weight: bold;
+    background: rgb(206, 253, 164, 0.5);
+    border-radius: 10px;
+}
+
+#probability-control {
+    font-size: 25px;  /* ✅ 기본 메시지 폰트 크기 */
+    color: #ffdf66;    /* ✅ 연한 오렌지색 (기본) */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* ✅ 가독성을 위한 그림자 효과 */
+}
+
+.probability-interface{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ✅ 기본 숫자 스타일 */
+.probability-number {
+    font-size: 40px;  /* ✅ 숫자 부분을 더 크게 설정 */
+    font-weight: bold; /* ✅ 숫자 강조 */
+    color: #ffea21;    /* ✅ 기본: 노란색 */
+}
+
+/* ✅ 10번 성공 시 전체 텍스트 주황색 */
+#probability-control.max-boost {
+    color: #ff682b !important; /* ✅ 10번 연속 성공 시 주황색 */
+}
+
+/* ✅ 감시자에게 걸렸을 때 전체 텍스트 빨간색 */
+#probability-control.danger {
+    color: #ff0000 !important; /* ✅ 감시자에게 걸렸을 때 빨간색 */
+}
+
+
+
+
+
 
 .betting-Bar{
     position: absolute;
@@ -182,7 +261,7 @@
     width: 80px;
     height: 50%;
     font-size: 14pt;
-    font-weight: bold;
+    /*font-weight: bold;*/
     background-color: black;
     color: white;
     border: none;

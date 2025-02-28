@@ -12,8 +12,6 @@ function getRandomSymbol() {
     if (window.forceTripleMatch) {
         const forcedSymbols = ['grape', 'orange', 'apple', 'bar', 'seven'];
         const randomSymbol = forcedSymbols[Math.floor(Math.random() * forcedSymbols.length)];
-        // window.forceTripleMatch = false; // 한 번 사용 후 초기화
-        // window.leverBoost = 0; // 확률 증가 초기화
         return randomSymbol;
     }
 
@@ -134,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isSpinning && !button.classList.contains('disabled')) {
             playSoundEffect("BtnSFX")
             animateButtonAndHand();
-            console.log(1);
+            // console.log(1);
             spinReels();
         }
     });

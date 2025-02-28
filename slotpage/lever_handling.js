@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const probabilityControl = document.getElementById("probability-control"); // ✅ span 요소 가져오기
 
     let successCount = 0; // 레버 성공 횟수
-    window.leverBoost = 0; // 같은 심볼 확률 증가 (0~100%)
+    window.leverBoost = 0.0; // 같은 심볼 확률 증가 (0~100%)
 
     function getObserverDetectionRate() {
         if (stage_id === 1) return 0.10; // 10% 확률로 감지
@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
             successCount++;
             const prevBoost = window.leverBoost;
             window.leverBoost = Math.min(successCount * 10, 100); // 10%씩 증가, 최대 100%
+            console.log(`Lever Success: Boost increased to ${window.leverBoost}%`); // 추가 로그
 
             if (window.leverBoost > prevBoost) {
                 updateProbabilityMessage(`🎉 레버 성공! 확률 증가: ${window.leverBoost}%`, successCount >= 10 ? "max-boost" : "default");

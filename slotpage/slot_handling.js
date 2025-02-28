@@ -1,4 +1,3 @@
-// script.js
 // 심볼 선언과 동시에 이미지와 가중치(슬롯에 나올 확률)를 부여
 const symbols = [
     { name: 'grape', weight: 60, image: './img/grape.png' },
@@ -8,7 +7,7 @@ const symbols = [
     { name: 'seven', weight: 10, image: './img/seven.png' },
 ];
 
-// 심볼 확률조작 함수: 레버를 당겨 확률이 100%가 되었을 때 심볼을 랜덤하게 등장하게 하면서도 무조건 적으로 동일한 심볼만 나오게 함
+// 심볼 확률조작 함수
 function getRandomSymbol() {
     if (window.forceTripleMatch) {
         const forcedSymbols = ['grape', 'orange', 'apple', 'bar', 'seven'];
@@ -16,15 +15,14 @@ function getRandomSymbol() {
         return randomSymbol;
     }
 
-    const boost = window.leverBoost || 0; // 레버 부스트 적용
-    const sameSymbolChance = boost / 100; // 0~1 사이 확률
-    if (Math.random() < sameSymbolChance) {
-        // 부스트 확률에 따라 같은 심볼 반환 (랜덤 선택)
+    const boost = window.leverBoost || 0;
+    const sameSymbolChance = boost / 100 * 5;
+    if (Math.random() < Math.min(sameSymbolChance, 1)) {
         const randomIndex = Math.floor(Math.random() * symbols.length);
+        console.log(`Boost triggered: ${boost}% -> Same symbol ${symbols[randomIndex].name}`);
         return symbols[randomIndex].name;
     }
 
-    // 기본 가중치 기반 랜덤 심볼 선택
     const totalWeight = symbols.reduce((sum, symbol) => sum + symbol.weight, 0);
     const randomNum = Math.random() * totalWeight;
     let cumulativeWeight = 0;
@@ -45,7 +43,7 @@ function updateReelSymbols(reel) {
     });
 }
 
-// 이벤트에 따른 애니메이션 동적 제어
+// 이벤트에 따른 애니메이션 동작 제어
 document.addEventListener('DOMContentLoaded', () => {
     const reel1 = document.querySelector('.reel1');
     const reel2 = document.querySelector('.reel2');
@@ -65,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         isSpinning = true;
-        playSoundEffect("SlotSFX")
+        playSoundEffect("SlotSFX");
         button.classList.add('disabled');
         lever.classList.add('disabled');
 
@@ -86,9 +84,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.forceTripleMatch) {
             finalResult1 = finalResult2 = finalResult3 = getRandomSymbol(); // 강제 동일 심볼
         } else {
-            finalResult1 = getRandomSymbol();
-            finalResult2 = getRandomSymbol();
-            finalResult3 = getRandomSymbol();
+            const boost = window.leverBoost || 0;
+            const sameSymbolChance = boost / 100;
+            if (Math.random() < Math.min(sameSymbolChance, 1)) {
+                // 부스트 적용 시 동일 심볼로 강제 설정
+                const randomIndex = Math.floor(Math.random() * symbols.length);
+                finalResult1 = finalResult2 = finalResult3 = symbols[randomIndex].name;
+                console.log(`Boost ${boost}% triggered: All set to ${finalResult1}`);
+            } else {
+                finalResult1 = getRandomSymbol();
+                finalResult2 = getRandomSymbol();
+                finalResult3 = getRandomSymbol();
+            }
         }
 
         setTimeout(() => {
@@ -118,7 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             if (typeof window.spinResult === 'function') {
                 window.spinResult(finalResult1, finalResult2, finalResult3);
-            } stopSoundEffect("SlotSFX");
+            }
+            stopSoundEffect("SlotSFX");
         }, 5300);
     }
 
@@ -133,11 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     button.addEventListener('click', () => {
         if (!isSpinning && !button.classList.contains('disabled')) {
-            playSoundEffect("BtnSFX")
+            playSoundEffect("BtnSFX");
             animateButtonAndHand();
-            // console.log(1);
             spinReels();
         }
     });
-
 });

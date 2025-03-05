@@ -77,3 +77,32 @@ body {
     80% { opacity: 0.6; }
     100% { opacity: 0.8; }
 }
+
+#playButton {
+    width: 150px;
+    height: 200px;
+
+    background-image: url("img/musicPlayBtn.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: top;
+
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    position: absolute; /* 절대 위치 설정 */
+    left: 20px;
+    top: 0;
+    z-index: 3;
+    align-items: center;
+    justify-content: flex-end; /* 텍스트를 아래쪽 정렬 */
+}
+
+.btn_text {
+    font-size: 15px;
+    color: #FF1493;
+    text-shadow: 6px 6px 10px #00ffcc;
+
+
+}

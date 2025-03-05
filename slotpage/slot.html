@@ -8,15 +8,22 @@
     <script src="https://kit.fontawesome.com/93236c49f3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.js"></script>
-    <script defer src="slot_db.js"></script>
+    <script type="module" src="slot_db.js"></script>
     <script defer src="slot_handling.js"></script>
-    <script defer src="lever_handling.js"></script>
+    <script type="module" src="lever_handling.js"></script>
     <script defer src="betting.js"></script>
     <script defer src="slot.js"></script>
 </head>
 <body>
 <!-- 배경 이미지 -->
 <img src="./img/background.png" class="background-img" alt="배경이미지">
+
+<!-- 인게임 배경&효과음 -->
+<audio id="inGameBg" src="mp3/bg_InGame.mp3" loop></audio>
+<audio id="BtnSFX" src="mp3/btn.mp3"></audio>
+<audio id="HurtSFX" src="mp3/hurt.mp3"></audio>
+<audio id="LeverSFX" src="mp3/lever.mp3"></audio>
+<audio id="SlotSFX" src="mp3/slot.mp3"></audio>
 
 <!-- 메인 컨테이너 -->
 <div class="main-Container">
@@ -28,10 +35,16 @@
 <!--        <button onclick="decreaseHealth()">체력 감소</button> &lt;!&ndash; 하트 감소 동작 확인용&ndash;&gt;-->
     </div>
 
+    <div class="username-bar">
+        USER-NAME : &nbsp<span id="username"></span>
+    </div>
+
+
     <!-- 2) 스테이지 표시 -->
     <div class="stage-Bar">
         STAGE: <span id="stage">0</span>
     </div>
+
 
     <!-- 3) 스코어 표시 -->
     <div class="score-Bar">
@@ -47,6 +60,13 @@
         <div class="betting-moneyBar">
             <img class="betting-money-img" src="./img/betting-Money.png" alt="배팅머니">
             <span id="bettingMoney">0</span>
+        </div>
+    </div>
+
+    <!-- 4-1) 확률 조작 인터페이스 -->
+    <div class="probability-bar">
+        <div class="probability-interface">
+            <span id="probability-control"></span>
         </div>
     </div>
 

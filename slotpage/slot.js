@@ -1,7 +1,4 @@
 // 이소영 : 체력 감소 & 감소 시 게임 오버 시작
-function gameOver() {
-    window.location.href = "../gameoverpage/gameover.html";
-}
 
 let maxHealth = 3; // 최대 체력
 let currentHealth = maxHealth; // 현재 체력
@@ -29,3 +26,50 @@ function updateHealthBar() {
     });
 }
 // 이소영 : 체력 감소 & 감소 시 게임 오버 끝
+
+let inGameBg;
+
+document.addEventListener('DOMContentLoaded', function () {
+    inGameBg = document.getElementById("inGameBg");
+    let shouldPlayInGameBg = sessionStorage.getItem("playInGameBg") === "true";
+
+    if (shouldPlayInGameBg) {
+        inGameBg.volume = 0.5;
+        inGameBg.play().then(() => {
+            console.log("재생 성공");
+        }).catch(error => {
+            console.error("실패:", error);
+        });
+
+        sessionStorage.removeItem("playInGameBg");
+    }
+})
+
+function gameOver() {
+    inGameBg.pause();
+    inGameBg.currentTime = 0;
+
+    sessionStorage.setItem("playGameOverBg", "true");
+
+    window.location.href = "../gameoverpage/gameover.html";
+}
+
+// 게임 내 효과음
+function playSoundEffect(audioId) {
+    let audio = document.getElementById(audioId);
+    if (audio) {
+        audio.volume = 1.0;
+        audio.currentTime = 0;
+        audio.play().catch(error => console.error(`${audioId} 효과음 재생 실패:`, error));
+    }
+}
+
+function stopSoundEffect(audioId) {
+    let audio = document.getElementById(audioId);
+    if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+}
+
+

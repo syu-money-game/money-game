@@ -1,109 +1,71 @@
 document.addEventListener("DOMContentLoaded", () => {
     const observer = document.querySelector(".observer-img");
     const lever = document.querySelector(".lever");
-    const probabilityControl = document.getElementById("probability-control"); //span 요소 가져오기
+    const probabilityControl = document.getElementById("probability-control");
 
     let successCount = 0; // 레버 성공 횟수
     window.leverBoost = 0; // 같은 심볼 확률 증가 (0~100%)
+    let stage_id = 1; // 현재 스테이지 ID
+    let timeoutId = null;
 
     function getObserverDetectionRate() {
-        if (stage_id === 1) return 0.10; // 10% 확률로 감지
-        if (stage_id === 2) return 0.48; // 48% 확률로 감지
-        if (stage_id === 3) return 0.60; // 60% 확률로 감지
-        return 0.10; // 기본값 (Stage 1과 동일)
+        if (stage_id === 1) return 0.10;
+        if (stage_id === 2) return 0.48;
+        if (stage_id === 3) return 0.60;
+        return 0.10;
     }
 
     function updateProbabilityMessage(message, type = "default") {
-        // 기존 클래스 제거 후 새로운 클래스 추가
         probabilityControl.classList.remove("max-boost", "danger");
         if (type === "danger") {
-            probabilityControl.classList.add("danger"); // 감시자에게 걸렸을 때 (빨간색)
+            probabilityControl.classList.add("danger");
         } else if (type === "max-boost") {
-            probabilityControl.classList.add("max-boost"); // 10번 성공했을 때 (주황색)
+            probabilityControl.classList.add("max-boost");
         }
     
-        // console.log("색상 타입:", type); // 디버깅
         probabilityControl.innerHTML = message.replace(
-            /(\d+%)/g, // 정규식으로 숫자% 찾기
-            `<span class="probability-number">$1</span>` // 숫자는 항상 같은 스타일 유지
+            /(\d+%)/g,
+            `<span class="probability-number">$1</span>`
         );
-
     }
-    
-    let timeoutId = null;  // 타이머 ID 저장
 
     function detectLeverActivation() {
-        const observerDetectionRate = getObserverDetectionRate(); // 현재 Stage의 감시 확률 적용
+        const observerDetectionRate = getObserverDetectionRate();
         const randomChance = Math.random();
-    
+
         if (randomChance < observerDetectionRate) {
-            // ✅ 감시자에게 걸렸을 때 (빨간색)
             console.log(`Observer detected the lever! Detection Rate: ${observerDetectionRate * 100}%`);
             observer.src = "img/observer_active.png";
             playSoundEffect("HurtSFX");
-            decreaseHealth(); // 체력 감소
+            decreaseHealth();
             updateProbabilityMessage("⚠ 감시자에게 들켰습니다! 체력이 감소합니다.", "danger");
-    
-            // 타이머 시간 추적 시작
-            console.time("MessageDisappearTime1");
-    
-            // 이전 타이머 취소하고 새 타이머 설정
-            if (timeoutId !== null) {
-                clearTimeout(timeoutId);  // 이전 타이머 취소
-            }
-    
-            timeoutId = setTimeout(() => {
+
+            setTimeout(() => {
                 observer.src = "img/observer.png";
-                probabilityControl.textContent = ""; // 2초 후 메시지 제거
-                console.timeEnd("MessageDisappearTime1");  // 타이머 종료
-                console.log("Message removed.");
+                probabilityControl.textContent = "";
             }, 2000);
-    
         } else {
-            // ✅ 감지되지 않음, 성공 카운트 증가
             successCount++;
             const prevBoost = window.leverBoost;
-            window.leverBoost = Math.min(successCount * 10, 100); // 10%씩 증가, 최대 100%
-    
+            window.leverBoost = Math.min(successCount * 10, 100);
+
             console.log(`Lever success! Boost: ${window.leverBoost}%, Success Count: ${successCount}`);
-    
-            // ✅ 확률 증가 메시지 표시 (10% 단위로 증가할 때만)
+
             if (window.leverBoost > prevBoost) {
                 updateProbabilityMessage(`🎉 레버 성공! 확률 증가: ${window.leverBoost}%`, successCount >= 10 ? "max-boost" : "default");
-    
-                // 타이머 시간 추적 시작
-                console.time("MessageDisappearTime2");
-    
-                // 이전 타이머 취소하고 새 타이머 설정
-                if (timeoutId !== null) {
-                    clearTimeout(timeoutId);  // 이전 타이머 취소
-                }
-    
+
+                if (timeoutId !== null) clearTimeout(timeoutId);
                 timeoutId = setTimeout(() => {
-                    probabilityControl.textContent = ""; // 2초 후 메시지 제거
-                    console.timeEnd("MessageDisappearTime2");  // 타이머 종료
-                    console.log("Message removed.");
+                    probabilityControl.textContent = "";
                 }, 2000);
             }
-    
-            // ✅ 10번 성공 시 강제 트리플 매치 (진한 오렌지색)
+
             if (successCount >= 10) {
-                console.log("10 successes achieved! Forcing triple match.");
                 window.forceTripleMatch = true;
                 updateProbabilityMessage("🔥 10번 연속 성공! 강제 트리플 매치 활성화!");
-    
-                // 타이머 시간 추적 시작
-                console.time("MessageDisappearTime3");
-    
-                // 이전 타이머 취소하고 새 타이머 설정
-                if (timeoutId !== null) {
-                    clearTimeout(timeoutId);  // 이전 타이머 취소
-                }
-    
-                timeoutId = setTimeout(() => {
-                    probabilityControl.textContent = ""; // 3초 후 메시지 제거
-                    console.timeEnd("MessageDisappearTime3");  // 타이머 종료
-                    console.log("Message removed.");
+
+                setTimeout(() => {
+                    probabilityControl.textContent = "";
                 }, 3000);
             }
         }
@@ -113,4 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
         detectLeverActivation();
         playSoundEffect("LeverSFX");
     });
+
+    // ✅ 전역 함수로 등록하여 다른 파일에서 호출 가능하도록 함
+    window.resetLeverProbability = function() {
+        console.log(`Stage ${stage_id} 시작! 레버 확률 초기화.`);
+        successCount = 0;
+        window.leverBoost = 0;
+        probabilityControl.textContent = ""; // UI 초기화
+        window.forceTripleMatch = false;
+    };
 });

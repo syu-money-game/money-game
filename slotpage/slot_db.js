@@ -1,3 +1,4 @@
+
 // slot_db.js
 let db;
 let user_id;
@@ -149,36 +150,32 @@ function spinResult(result1, result2, result3) {
 }
 
 function checkStage() {
-    // 3단계(목표: 100000000) 도달 -> 게임 종료 -> startpage
     if (score >= 100000000 && stage_id === 3) {
         stage_id = 3;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 3 클리어! 민성이는 인생 역전에 성공했습니다!!");
         window.location.href = "../startpage/title.html";
-        window.leverBoost = 0; // 스테이지 클리어 시 초기화
-        window.forceTripleMatch = false; // 스테이지 클리어 시 초기화
-    }
-    // 2단계(목표: 10000000) 도달
+
+        window.resetLeverProbability(); // ✅ 전역 함수 호출
+
+    } 
     else if (score >= 10000000 && stage_id < 3) {
         stage_id = 3;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 2 클리어! Stage 3로 이동합니다.");
 
-        window.leverBoost = 0; // 스테이지 클리어 시 초기화
-        window.forceTripleMatch = false; // 스테이지 클리어 시 초기화
-        // 스코어 초기화
+        window.resetLeverProbability(); // ✅ 전역 함수 호출
+
         score = 0;
         updateUI();
-    }
-    // 1단계(목표: 1000000) 도달
+    } 
     else if (score >= 1000000 && stage_id < 2) {
         stage_id = 2;
         db.run(`UPDATE user SET stage_id=? WHERE user_id=?`, [stage_id, user_id]);
         alert("Stage 1 클리어! Stage 2로 이동합니다.");
-        window.leverBoost = 0; // 스테이지 변경 시 초기화
-        window.forceTripleMatch = false; // 스테이지 변경 시 초기화
+        
+        window.resetLeverProbability(); // ✅ 전역 함수 호출
 
-        // 스코어 초기화
         score = 0;
         updateUI();
     }

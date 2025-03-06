@@ -23,34 +23,38 @@
 김민성 
 어제 : 프로젝트 문서 관리 및 총괄
 오늘 : 감시자 추가 및 프로젝트 관리
+
 이재혁
 어제 : 핸들 제작 
 오늘 : 핸들 사운드 추가 및 핸들 로직 개선
+
 이소영 
 어제 : startpage 제작 
 오늘 : gameoverpage 제작
+
 지상혁 
 어제 : 슬롯머신 페이지 제작 
 오늘 : 슬롯머신 룰렛 핸들링 
+
 유민수 
 어제 : db 스키마 제작 및 DDL작성
 오늘 : DML 작성 및 CRUD 테스트
 
 2025/02/27
 해야할 것
-심볼 확률 적용
-레버 당길 시 확률 조작 로직 구현
-stage넘어갈 시 score만 초기화
-score, currentMoney 증가 로직
-score, currentMoney, battingMoney 디비 연동
-hand_handling.js: button, toggle 로직 수정 및 병합
-감시자에게 걸릴 시 체력 감소
-currentMoney 소진 시 게임종료
+심볼 확률 적용 
+레버 당길 시 확률 조작 로직 구현  
+stage넘어갈 시 score만 초기화 
+score, currentMoney 증가 로직 
+score, currentMoney, battingMoney 디비 연동 
+hand_handling.js: button, toggle 로직 수정 및 병합 
+감시자에게 걸릴 시 체력 감소 
+currentMoney 소진 시 게임종료 
 
 // 오디오 적용
 
 상혁
-어제
+어제 
 배팅 input
 슬롯머신 애니메이션 구현 및  js 핸들링
 오늘
